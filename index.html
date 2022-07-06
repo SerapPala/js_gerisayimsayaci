@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Geri Sayım Sayacı</title>
 </head>
+
 <body>
-    test
+
+
+    <p id="sayim"></p>
+
+    <script>
+        //Geri sayım tarihini belirle
+        var geriSayim = new Date("July 1, 2020,23:30:15").getTime();
+
+        //Her 1 saniyede güncelle
+        var x = setInterval(function () {
+
+            //Şimdiki tarihi belirle
+            var simdiZaman = new Date().getTime();
+
+            //geri sayım tarihi ile şimdiki tarih arasındaki zaman farkı
+            var uzaklik = geriSayim - simdiZaman;
+
+
+            //Gün saat dakika saniye bazında hesapla
+            var gunler = Math.floor(uzaklik / (1000 * 60 * 60 * 24));
+            var saatler = Math.floor((uzaklik % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var dakikalar = Math.floor((uzaklik % (1000 * 60 * 60)) / (1000 * 60));
+            var saniyeler = Math.floor(uzaklik % (1000 * 60) / 1000);
+
+            //sayim id sine sahip paragrafa bu işlemi çağırma
+
+            document.getElementById("sayim").innerHTML = gunler + "g" + saatler + "s" + dakikalar + "d" + saniyeler + "s";
+
+
+            if (uzaklik < 0) {
+                clearInterval(x);
+                document.getElementById("sayim").innerHTML = "Geri sayim bitti";
+            }
+
+
+
+
+        }, 1000);
+
+
+    </script>
 </body>
+
 </html>
